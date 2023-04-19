@@ -18,14 +18,24 @@ def recipes():
                 values (%s, %s, %s, %s, %s, %s, %s)
             '''
 
+            if str(body['originID']) == '':
+                originId = None
+            else:
+                originId = int(body['originID'])
+
+            if str(body['categoryID']) == '':
+                categoryId = None
+            else:
+                categoryId = int(body['originID'])
+
             recipe_data = (
                 int(body['creatorID']), 
                 str(body['title']), 
                 str(body['description']), 
                 int(body['servings']), 
                 str(body['difficulty']), 
-                int(body['originID']), 
-                int(body['categoryID'])
+                originId,
+                categoryId
             )
 
             cursor.execute(insert_recipe, recipe_data)
@@ -157,21 +167,36 @@ def get_creators():
     return jsonify(json_data)
 
 # Gets the recipe creator account with the given id 
-@creator.route('/accounts/creator/<creatorID>', methods=['GET'])
+@creator.route('/accounts/creator/<creatorID>', methods=['GET', 'POST'])
 def get_creator_from_id(creatorID):
-    cursor = db.get_db().cursor()
-    query = '''
-    SELECT *
-    FROM Recipe_Creator
-    WHERE creatorID = {0};
-    '''.format(creatorID)
-    cursor.execute(query)
-    column_headers = [x[0] for x in cursor.description]
-    json_data = []
-    theData = cursor.fetchall()
-    for row in theData:
-        json_data.append(dict(zip(column_headers, row)))
-    return jsonify(json_data)
+    if request.method == 'GET':
+        cursor = db.get_db().cursor()
+        query = '''
+        SELECT *
+        FROM Recipe_Creator
+        WHERE creatorID = {0};
+        '''.format(creatorID)
+        cursor.execute(query)
+        column_headers = [x[0] for x in cursor.description]
+        json_data = []
+        theData = cursor.fetchall()
+        for row in theData:
+            json_data.append(dict(zip(column_headers, row)))
+        return jsonify(json_data)
+    elif request.method == 'PUT':
+
+        body = request.get_json()
+        firstName = body['firstName']
+        lastName = body['lastName']
+
+        query = f'''
+            UPDATE Recipe_Creator SET fName=\'{firstName}\', lName=\'{lastName}\' WHERE creatorId={str(creatorID)};
+        '''
+        cursor = db.get_db().cursor()
+        cursor.execute(query)
+        db.get_db().commit()
+
+        return 'Success'
 
 # Gets a list of reviews for the specified recipe
 @creator.route('/recipes/<recipeID>/review', methods=['GET'])
