@@ -6,9 +6,24 @@ import logging
 creator = Blueprint('creator', __name__)
 logger = logging.getLogger('platter')
 
-@creator.route('/recipes', methods=['POST'])
+@creator.route('/recipes', methods=['GET', 'POST'])
 def recipes():
-    if request.method == 'POST':
+    if request.method == 'GET':
+        cursor = db.get_db().cursor()
+        query = '''
+            SELECT creatorID, recipeID, title, description, servings, difficulty, originID, categoryID, date_created
+            FROM Recipes
+            ORDER BY date_created DESC
+        '''
+
+        cursor.execute(query)
+        column_headers = [x[0] for x in cursor.description]
+        json_data = []
+        theData = cursor.fetchall()
+        for row in theData:
+            json_data.append(dict(zip(column_headers, row)))
+        return jsonify(json_data)
+    elif request.method == 'POST':
         try:
             cursor = db.get_db().cursor()
             body = request.get_json()
@@ -18,15 +33,15 @@ def recipes():
                 values (%s, %s, %s, %s, %s, %s, %s)
             '''
 
-            if str(body['originID']) == '':
+            if str(body['cuisine_origin']) == '':
                 originId = None
             else:
-                originId = int(body['originID'])
+                originId = int(body['cuisine_origin'])
 
-            if str(body['categoryID']) == '':
+            if str(body['category']) == '':
                 categoryId = None
             else:
-                categoryId = int(body['originID'])
+                categoryId = int(body['category'])
 
             recipe_data = (
                 int(body['creatorID']), 
@@ -167,7 +182,7 @@ def get_creators():
     return jsonify(json_data)
 
 # Gets the recipe creator account with the given id 
-@creator.route('/accounts/creator/<creatorID>', methods=['GET', 'POST'])
+@creator.route('/accounts/creator/<creatorID>', methods=['GET', 'PUT'])
 def get_creator_from_id(creatorID):
     if request.method == 'GET':
         cursor = db.get_db().cursor()
