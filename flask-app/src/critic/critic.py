@@ -36,10 +36,10 @@ def get_recipes():
         categoryString = f'(dietType={diet})'
 
     if cuisine is not None and len(cuisine[0]) != 0:
-        cuisine = 'origin IN (' + ",".join('\'' + c + '\'' for c in cuisine[0]) + ')'
+        cuisineString = 'origin IN (' + ",".join('\'' + c + '\'' for c in cuisine[0]) + ')'
 
     if categoryString != '' and cuisineString != '':
-        whereString = 'WHERE ' + categoryString + ' OR ' + cuisineString # change to AND
+        whereString = 'WHERE ' + categoryString + ' AND ' + cuisineString
     elif categoryString != '':
         whereString = 'WHERE ' + categoryString
     elif cuisineString != '':
@@ -67,6 +67,9 @@ def get_recipes():
         {whereString}
         ORDER BY R.date_created;
     '''
+
+    current_app.logger.info(query)
+
 
     # use cursor to query the database for a list of products
     cursor.execute(query)
@@ -386,3 +389,21 @@ def get_bookmarks(id):
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
+
+# accounts/critics/
+@critic.route('/accounts/critics/<id>',  methods=['PUT'])
+def update_account(id):
+
+    body = request.get_json()
+    firstName = body['firstName']
+    lastName = body['lastName']
+
+    query = f'''
+        UPDATE Recipe_Critic SET fName=\'{firstName}\', lName=\'{lastName}\' WHERE criticID={str(id)};
+    '''
+    
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    return 'Success'
