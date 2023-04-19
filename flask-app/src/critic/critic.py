@@ -93,7 +93,7 @@ def get_recipes():
 def get_ingredients():
     cursor = db.get_db().cursor()
     query = '''
-        SELECT DISTINCT name as label, name as value from Ingredients
+        SELECT DISTINCT name as label, ingredientID as value from Ingredients
     '''
     cursor.execute(query)
        # grab the column headers from the returned data
@@ -118,7 +118,7 @@ def get_ingredients():
 def get_cuisine():
     cursor = db.get_db().cursor()
     query = '''
-        SELECT DISTINCT origin as label, origin as value FROM Cuisine_Origins
+        SELECT DISTINCT origin as label, originID as value FROM Cuisine_Origins
     '''
     cursor.execute(query)
        # grab the column headers from the returned data
@@ -143,7 +143,7 @@ def get_cuisine():
 def get_category():
     cursor = db.get_db().cursor()
     query = '''
-        SELECT DISTINCT CONCAT(course, ', ', dietType) as label, CONCAT(course, ', ', dietType) as value FROM Categories
+        SELECT DISTINCT CONCAT(course, ', ', dietType) as label, categoryID as value FROM Categories
     '''
     cursor.execute(query)
        # grab the column headers from the returned data

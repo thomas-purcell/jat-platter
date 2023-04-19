@@ -75,6 +75,7 @@ def del_recipes_id(recipeID):
     '''.format(recipeID)
 
     cursor.execute(query)
+    db.get_db().commit()
     the_response = make_response()
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
@@ -84,7 +85,9 @@ def del_recipes_id(recipeID):
 @creator.route('/recipes/<recipeID>', methods=['PUT'])
 def put_recipes_id(recipeID):
     cursor = db.get_db().cursor()
-    title = request.form.get('title')
+    body = request.get_json()
+
+    title = str(body['title'])
 
     query = '''
     UPDATE Recipes
@@ -93,23 +96,7 @@ def put_recipes_id(recipeID):
     '''.format(title, recipeID)
 
     cursor.execute(query)
-    the_response = make_response()
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-
-# Creates a new ingredient 
-@creator.route('/ingredients', methods=['POST'])
-def post_ingredient():
-    cursor = db.get_db().cursor()
-
-    body = request.get_json()
-    name = body['name']
-    query = '''
-    insert into Ingredients (name) values ('{0}');
-    '''.format(name)
-
-    cursor.execute(query)
+    db.get_db().commit()
     the_response = make_response()
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
@@ -229,11 +216,11 @@ def get_recipe_instructions(recipeID):
         try:
             cursor = db.get_db().cursor()
             insert_step = '''
-                INSERT INTO Instruction_Steps (instructionID, recipeID, step)
-                values (%s, %s, %s)
+                INSERT INTO Instruction_Step (instructionID, recipeID, step, stepNum)
+                values (%s, %s, %s, %s)
             '''
             body = request.get_json()
-            step_data = (int(recipeID), int(recipeID), str(body['step_description']))
+            step_data = (int(recipeID), int(recipeID), str(body['instruction_step_description']), int(body['instruction_step_number']))
             cursor.execute(insert_step, step_data)
             db.get_db().commit()
             return 'Success!', 200
@@ -326,7 +313,7 @@ def recipe_ingredients(recipeID):
                 values (%s, %s, %s, %s)
             '''
             body = request.get_json()
-            data = (int(body['ingredientID']), int(recipeID), float(body['amount']), str(body['unit']))
+            data = (int(body['recipe_ingredient']), int(recipeID), float(body['recipe_ingredient_amount']), str(body['recipe_ingredient_unit']))
             cursor.execute(insert_stmt, data)
             db.get_db().commit()
             
