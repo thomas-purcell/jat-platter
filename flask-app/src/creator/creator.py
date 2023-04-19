@@ -18,14 +18,24 @@ def recipes():
                 values (%s, %s, %s, %s, %s, %s, %s)
             '''
 
+            if str(body['originID']) == '':
+                originId = None
+            else:
+                originId = int(body['originID'])
+
+            if str(body['categoryID']) == '':
+                categoryId = None
+            else:
+                categoryId = int(body['originID'])
+
             recipe_data = (
                 int(body['creatorID']), 
                 str(body['title']), 
                 str(body['description']), 
                 int(body['servings']), 
                 str(body['difficulty']), 
-                int(body['originID']), 
-                int(body['categoryID'])
+                originId,
+                categoryId
             )
 
             cursor.execute(insert_recipe, recipe_data)
@@ -75,6 +85,7 @@ def del_recipes_id(recipeID):
     '''.format(recipeID)
 
     cursor.execute(query)
+    db.get_db().commit()
     the_response = make_response()
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
@@ -84,7 +95,9 @@ def del_recipes_id(recipeID):
 @creator.route('/recipes/<recipeID>', methods=['PUT'])
 def put_recipes_id(recipeID):
     cursor = db.get_db().cursor()
-    title = request.form.get('title')
+    body = request.get_json()
+
+    title = str(body['title'])
 
     query = '''
     UPDATE Recipes
@@ -93,23 +106,7 @@ def put_recipes_id(recipeID):
     '''.format(title, recipeID)
 
     cursor.execute(query)
-    the_response = make_response()
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
-
-# Creates a new ingredient 
-@creator.route('/ingredients', methods=['POST'])
-def post_ingredient():
-    cursor = db.get_db().cursor()
-
-    body = request.get_json()
-    name = body['name']
-    query = '''
-    insert into Ingredients (name) values ('{0}');
-    '''.format(name)
-
-    cursor.execute(query)
+    db.get_db().commit()
     the_response = make_response()
     the_response.status_code = 200
     the_response.mimetype = 'application/json'
@@ -170,21 +167,36 @@ def get_creators():
     return jsonify(json_data)
 
 # Gets the recipe creator account with the given id 
-@creator.route('/accounts/creator/<creatorID>', methods=['GET'])
+@creator.route('/accounts/creator/<creatorID>', methods=['GET', 'POST'])
 def get_creator_from_id(creatorID):
-    cursor = db.get_db().cursor()
-    query = '''
-    SELECT *
-    FROM Recipe_Creator
-    WHERE creatorID = {0};
-    '''.format(creatorID)
-    cursor.execute(query)
-    column_headers = [x[0] for x in cursor.description]
-    json_data = []
-    theData = cursor.fetchall()
-    for row in theData:
-        json_data.append(dict(zip(column_headers, row)))
-    return jsonify(json_data)
+    if request.method == 'GET':
+        cursor = db.get_db().cursor()
+        query = '''
+        SELECT *
+        FROM Recipe_Creator
+        WHERE creatorID = {0};
+        '''.format(creatorID)
+        cursor.execute(query)
+        column_headers = [x[0] for x in cursor.description]
+        json_data = []
+        theData = cursor.fetchall()
+        for row in theData:
+            json_data.append(dict(zip(column_headers, row)))
+        return jsonify(json_data)
+    elif request.method == 'PUT':
+
+        body = request.get_json()
+        firstName = body['firstName']
+        lastName = body['lastName']
+
+        query = f'''
+            UPDATE Recipe_Creator SET fName=\'{firstName}\', lName=\'{lastName}\' WHERE creatorId={str(creatorID)};
+        '''
+        cursor = db.get_db().cursor()
+        cursor.execute(query)
+        db.get_db().commit()
+
+        return 'Success'
 
 # Gets a list of reviews for the specified recipe
 @creator.route('/recipes/<recipeID>/review', methods=['GET'])
@@ -229,11 +241,11 @@ def get_recipe_instructions(recipeID):
         try:
             cursor = db.get_db().cursor()
             insert_step = '''
-                INSERT INTO Instruction_Steps (instructionID, recipeID, step)
-                values (%s, %s, %s)
+                INSERT INTO Instruction_Step (instructionID, recipeID, step, stepNum)
+                values (%s, %s, %s, %s)
             '''
             body = request.get_json()
-            step_data = (int(recipeID), int(recipeID), str(body['step_description']))
+            step_data = (int(recipeID), int(recipeID), str(body['instruction_step_description']), int(body['instruction_step_number']))
             cursor.execute(insert_step, step_data)
             db.get_db().commit()
             return 'Success!', 200
@@ -326,7 +338,7 @@ def recipe_ingredients(recipeID):
                 values (%s, %s, %s, %s)
             '''
             body = request.get_json()
-            data = (int(body['ingredientID']), int(recipeID), float(body['amount']), str(body['unit']))
+            data = (int(body['recipe_ingredient']), int(recipeID), float(body['recipe_ingredient_amount']), str(body['recipe_ingredient_unit']))
             cursor.execute(insert_stmt, data)
             db.get_db().commit()
             
