@@ -45,154 +45,17 @@
     "_id": "262d9cc8-b131-49ff-baab-5b610a74712e",
     "colId": "5bab8604-9135-4cc4-99a2-227e7011d403",
     "containerId": "",
-    "name": "get_categories",
+    "name": "Create new category success",
     "url": "localhost:8001/cre/categories",
-    "method": "GET",
+    "method": "POST",
     "sortNum": 10000,
     "created": "2023-04-19T02:54:07.923Z",
-    "modified": "2023-04-19T02:54:18.796Z",
-    "headers": [],
-    "params": [],
-    "tests": []
-  },
-  {
-    "_id": "acd34751-5ff3-4bde-a13e-0b8e8c2b49ca",
-    "colId": "5bab8604-9135-4cc4-99a2-227e7011d403",
-    "containerId": "",
-    "name": "get_origins",
-    "url": "localhost:8001/cre/origins",
-    "method": "GET",
-    "sortNum": 20000,
-    "created": "2023-04-19T02:54:23.438Z",
-    "modified": "2023-04-19T02:54:33.694Z",
-    "headers": [],
-    "params": [],
-    "tests": []
-  },
-  {
-    "_id": "a5c6209a-d9c7-482f-91b1-baca9e205927",
-    "colId": "5bab8604-9135-4cc4-99a2-227e7011d403",
-    "containerId": "",
-    "name": "new_origin",
-    "url": "localhost:8001/cre/origins",
-    "method": "POST",
-    "sortNum": 20000,
-    "created": "2023-04-19T04:11:30.672Z",
-    "modified": "2023-04-19T12:12:19.060Z",
+    "modified": "2023-04-20T00:21:10.593Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n  \"origin_region\": \"Italy\",\n  \"origin_description\": \"Traditional Italian food.\"\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "6e9b8f8c-129d-4120-af41-0e22623d517b",
-    "colId": "5bab8604-9135-4cc4-99a2-227e7011d403",
-    "containerId": "",
-    "name": "get_ingredients",
-    "url": "localhost:8001/cre/ingredients",
-    "method": "GET",
-    "sortNum": 30000,
-    "created": "2023-04-19T12:22:03.939Z",
-    "modified": "2023-04-19T12:22:16.222Z",
-    "headers": [],
-    "params": [],
-    "tests": []
-  },
-  {
-    "_id": "78f20c91-25e1-4739-b9c8-b361c7b2338e",
-    "colId": "5bab8604-9135-4cc4-99a2-227e7011d403",
-    "containerId": "",
-    "name": "new_ingredient",
-    "url": "localhost:8001/cre/ingredients",
-    "method": "POST",
-    "sortNum": 40000,
-    "created": "2023-04-19T12:22:31.604Z",
-    "modified": "2023-04-19T12:56:30.052Z",
-    "headers": [],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"ingredient_nme\": \"Olive oil\"\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "3968f62c-7b23-40bf-a6be-d207670e17e6",
-    "colId": "5bab8604-9135-4cc4-99a2-227e7011d403",
-    "containerId": "",
-    "name": "add_recipe_ingredient",
-    "url": "localhost:8001/cre/recipes/1/ingredients",
-    "method": "POST",
-    "sortNum": 50000,
-    "created": "2023-04-19T14:10:13.552Z",
-    "modified": "2023-04-19T14:15:58.684Z",
-    "headers": [],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"ingredientID\": \"1\",\n  \"amount\": 4,\n  \"unit\": \"Tsp\"\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "7fae28d5-83de-4d04-9a52-e05670cdfb5b",
-    "colId": "5bab8604-9135-4cc4-99a2-227e7011d403",
-    "containerId": "",
-    "name": "delete_recipe_ingredient",
-    "url": "localhost:8001/cre/recipes/1/ingredients",
-    "method": "DELETE",
-    "sortNum": 60000,
-    "created": "2023-04-19T14:25:18.024Z",
-    "modified": "2023-04-19T14:25:37.156Z",
-    "headers": [],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"ingredientID\": \"1\"\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "06a43962-95e4-4bce-9753-6b95db00148c",
-    "colId": "5bab8604-9135-4cc4-99a2-227e7011d403",
-    "containerId": "",
-    "name": "new_recipe",
-    "url": "localhost:8001/cre/recipes",
-    "method": "POST",
-    "sortNum": 70000,
-    "created": "2023-04-19T15:12:15.395Z",
-    "modified": "2023-04-19T15:15:14.682Z",
-    "headers": [],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"creatorID\": 1,\n  \"originID\": 1,\n  \"categoryID\": 1,\n  \"prep_time\": 30,\n  \"cook_time\": 30,\n  \"title\": \"Spaghetti\",\n  \"description\": \"Spaghetti with tomato sauce\",\n  \"difficulty\": \"Easy\",\n  \"servings\": 4\n}",
-      "form": []
-    },
-    "tests": []
-  },
-  {
-    "_id": "1503f5d9-bbaa-43b4-9144-a9c36d31c78d",
-    "colId": "5bab8604-9135-4cc4-99a2-227e7011d403",
-    "containerId": "",
-    "name": "http://localhost:8001/cre/ingredients",
-    "url": "http://localhost:8001/cre/ingredients",
-    "method": "POST",
-    "sortNum": 80000,
-    "created": "2023-04-19T16:55:09.689Z",
-    "modified": "2023-04-19T16:55:09.689Z",
-    "headers": [],
-    "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n  \"name\": \"Salt\"\n}",
+      "raw": "{\n  \"course_name\": \"Breakfast\",\n  \"diet_type\": \"Other\"\n}",
       "form": []
     },
     "tests": [
@@ -206,7 +69,194 @@
         "type": "res-body",
         "custom": "",
         "action": "equal",
-        "value": ""
+        "value": "Success!"
+      }
+    ]
+  },
+  {
+    "_id": "acd34751-5ff3-4bde-a13e-0b8e8c2b49ca",
+    "colId": "5bab8604-9135-4cc4-99a2-227e7011d403",
+    "containerId": "",
+    "name": "Get cuisine fail",
+    "url": "localhost:8001/cre/cuisine",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2023-04-19T02:54:23.438Z",
+    "modified": "2023-04-20T00:20:00.318Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "405"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "contains",
+        "value": "Method Not Allowed"
+      }
+    ]
+  },
+  {
+    "_id": "a5c6209a-d9c7-482f-91b1-baca9e205927",
+    "colId": "5bab8604-9135-4cc4-99a2-227e7011d403",
+    "containerId": "",
+    "name": "Create new cuisine success",
+    "url": "localhost:8001/cre/cuisine",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2023-04-19T04:11:30.672Z",
+    "modified": "2023-04-20T00:18:39.396Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"origin_region\": \"Italy\",\n  \"origin_description\": \"Traditional Italian food.\"\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "equal",
+        "value": "Success!"
+      }
+    ]
+  },
+  {
+    "_id": "6e9b8f8c-129d-4120-af41-0e22623d517b",
+    "colId": "5bab8604-9135-4cc4-99a2-227e7011d403",
+    "containerId": "",
+    "name": "Create new ingredient success",
+    "url": "localhost:8001/cre/ingredients",
+    "method": "POST",
+    "sortNum": 30000,
+    "created": "2023-04-19T12:22:03.939Z",
+    "modified": "2023-04-20T00:18:03.272Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"name\": \"Tomato\"\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "400"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "equal",
+        "value": "Could not create new ingredient"
+      }
+    ]
+  },
+  {
+    "_id": "3968f62c-7b23-40bf-a6be-d207670e17e6",
+    "colId": "5bab8604-9135-4cc4-99a2-227e7011d403",
+    "containerId": "",
+    "name": "Add recipe ingredient fail",
+    "url": "localhost:8001/cre/recipes/1/ingredients",
+    "method": "POST",
+    "sortNum": 50000,
+    "created": "2023-04-19T14:10:13.552Z",
+    "modified": "2023-04-20T00:14:30.100Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"ingredientID\": \"1\",\n  \"amount\": 4,\n  \"unit\": \"Tsp\"\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "400"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "equal",
+        "value": "Could not add new recipe ingredient"
+      }
+    ]
+  },
+  {
+    "_id": "7fae28d5-83de-4d04-9a52-e05670cdfb5b",
+    "colId": "5bab8604-9135-4cc4-99a2-227e7011d403",
+    "containerId": "",
+    "name": "Delete recipe ingredient success",
+    "url": "localhost:8001/cre/recipes/1/ingredients",
+    "method": "DELETE",
+    "sortNum": 52500,
+    "created": "2023-04-19T14:25:18.024Z",
+    "modified": "2023-04-20T00:31:48.094Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"ingredientID\": \"4000\"\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "equal",
+        "value": "Success!"
+      }
+    ]
+  },
+  {
+    "_id": "06a43962-95e4-4bce-9753-6b95db00148c",
+    "colId": "5bab8604-9135-4cc4-99a2-227e7011d403",
+    "containerId": "",
+    "name": "New recipe success",
+    "url": "localhost:8001/cre/recipes",
+    "method": "POST",
+    "sortNum": 70000,
+    "created": "2023-04-19T15:12:15.395Z",
+    "modified": "2023-04-20T00:00:42.486Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"cuisine_origin\": 1,\n  \"category\": 1,\n  \"creatorID\": 1,\n  \"prep_time\": 30,\n  \"cook_time\": 30,\n  \"title\": \"Spaghetti\",\n  \"description\": \"Spaghetti with tomato sauce\",\n  \"difficulty\": \"Easy\",\n  \"servings\": 4\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": ">",
+        "value": "1"
+      },
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
       }
     ]
   },
@@ -356,7 +406,7 @@
     "method": "GET",
     "sortNum": 140000,
     "created": "2023-04-19T16:56:23.534Z",
-    "modified": "2023-04-19T16:56:23.534Z",
+    "modified": "2023-04-20T00:34:26.755Z",
     "headers": [],
     "params": [],
     "tests": [
@@ -364,13 +414,13 @@
         "type": "json-query",
         "custom": "json.[0].fName",
         "action": "equal",
-        "value": "Bastian"
+        "value": "Grant"
       },
       {
         "type": "json-query",
         "custom": "json.[0].lName",
         "action": "equal",
-        "value": "Gollop"
+        "value": "Williams"
       },
       {
         "type": "json-query",
@@ -527,6 +577,129 @@
         "custom": "json.[1].step",
         "action": "equal",
         "value": "Curabitur at ipsum ac tellus semper interdum."
+      }
+    ]
+  },
+  {
+    "_id": "a2e952a6-9951-47e8-a14a-517cc285c9e7",
+    "colId": "5bab8604-9135-4cc4-99a2-227e7011d403",
+    "containerId": "",
+    "name": "Create new ingredient failure",
+    "url": "localhost:8001/cre/ingredients",
+    "method": "POST",
+    "sortNum": 40000,
+    "created": "2023-04-20T00:17:35.861Z",
+    "modified": "2023-04-20T00:17:35.861Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"ingredient_name\": \"Tomato\"\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "equal",
+        "value": "Success!"
+      }
+    ]
+  },
+  {
+    "_id": "99916cf1-ca99-4ee1-8302-bda39f4e454f",
+    "colId": "5bab8604-9135-4cc4-99a2-227e7011d403",
+    "containerId": "",
+    "name": "Get recipes success",
+    "url": "localhost:8001/cre/recipes",
+    "method": "GET",
+    "sortNum": 75000,
+    "created": "2023-04-20T00:21:38.645Z",
+    "modified": "2023-04-20T00:22:32.961Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "contains",
+        "value": "Spaghetti with tomato sauce"
+      },
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      }
+    ]
+  },
+  {
+    "_id": "8cbed808-af19-4d97-b223-490f9ec48f8d",
+    "colId": "5bab8604-9135-4cc4-99a2-227e7011d403",
+    "containerId": "",
+    "name": "Update user name success",
+    "url": "localhost:8001/cre/accounts/creator/1",
+    "method": "PUT",
+    "sortNum": 77500,
+    "created": "2023-04-20T00:23:19.906Z",
+    "modified": "2023-04-20T00:24:57.057Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"firstName\": \"Grant\",\n  \"lastName\": \"Williams\"\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "equal",
+        "value": "Success"
+      },
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      }
+    ]
+  },
+  {
+    "_id": "a18b1045-d13b-4eb7-9488-fb54e9fef87b",
+    "colId": "5bab8604-9135-4cc4-99a2-227e7011d403",
+    "containerId": "",
+    "name": "Add recipe instruction fail",
+    "url": "localhost:8001/cre/recipes/1/instructions",
+    "method": "POST",
+    "sortNum": 78750,
+    "created": "2023-04-20T00:26:54.991Z",
+    "modified": "2023-04-20T00:29:00.630Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"step_description\": \"Boil the water\",\n  \"step_number\": 5\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "equal",
+        "value": "Could not create new recipe instruction"
+      },
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "400"
       }
     ]
   }

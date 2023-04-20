@@ -233,7 +233,7 @@ def get_recipe_reviews(recipeID):
     return jsonify(json_data)
 
 # Gets all of the instructions for the given recipe
-@creator.route('/recipes/<recipeID>/instructions', methods=['GET', 'POST', 'DELETE'])
+@creator.route('/recipes/<recipeID>/instructions', methods=['GET', 'POST'])
 def get_recipe_instructions(recipeID):
     if request.method == 'GET':
         cursor = db.get_db().cursor()
@@ -267,25 +267,6 @@ def get_recipe_instructions(recipeID):
         except Exception as e:
             logger.exception(e)
             return 'Could not create new recipe instruction', 400
-    elif request.method == 'DELETE':
-        try:
-            cursor = db.get_db().cursor()
-            delete_steps = '''
-                DELETE FROM Instruction_Steps WHERE recipeID = %s AND instructionID = %s
-            '''
-            
-            delete_instruction = '''
-                DELETE FROM Instructions WHERE recipeID = %s AND instructionID = %s
-            '''
-            body = request.get_json()
-            data = (int(recipeID), int(body['instructionID']))
-            cursor.execute(delete_steps, data)
-            cursor.execute(delete_instruction, data)
-            db.get_db().commit()
-            return 'Success!', 200
-        except Exception as e:
-            logger.exception(e)
-            return 'Could not delete recipe instruction', 400
 
 
 @creator.route('/categories', methods=['POST'])
@@ -375,4 +356,4 @@ def recipe_ingredients(recipeID):
             return 'Success!'
         except Exception as e:
             logger.exception(e)
-            return 'Could not delete new recipe ingredient', 400
+            return 'Could not delete recipe ingredient', 400
