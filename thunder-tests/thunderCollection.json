@@ -11,6 +11,21 @@
     "colName": "Platter",
     "created": "2023-04-19T02:54:01.922Z",
     "sortNum": 20000,
-    "folders": []
+    "folders": [
+      {
+        "_id": "979bfe55-ac21-4ac6-9704-3b176499991f",
+        "name": "Critic",
+        "containerId": "",
+        "created": "2023-04-20T00:46:16.867Z",
+        "sortNum": 10000
+      },
+      {
+        "_id": "de10810b-2a04-4e4c-a403-69256377440c",
+        "name": "Creator",
+        "containerId": "",
+        "created": "2023-04-20T00:46:24.878Z",
+        "sortNum": 20000
+      }
+    ]
   }
 ]

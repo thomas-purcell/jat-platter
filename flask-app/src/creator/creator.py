@@ -101,10 +101,8 @@ def del_recipes_id(recipeID):
 
     cursor.execute(query)
     db.get_db().commit()
-    the_response = make_response()
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
+
+    return 'Success'
 
 # Updates the name of the recipe with the given id 
 @creator.route('/recipes/<recipeID>', methods=['PUT'])
@@ -122,10 +120,8 @@ def put_recipes_id(recipeID):
 
     cursor.execute(query)
     db.get_db().commit()
-    the_response = make_response()
-    the_response.status_code = 200
-    the_response.mimetype = 'application/json'
-    return the_response
+
+    return 'Success'
 
 # Gets all recipes for the given user 
 @creator.route('/creator/<creatorID>/recipes', methods=['GET'])
