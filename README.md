@@ -25,6 +25,10 @@ This repo contains a boilerplate setup for spinning up 3 Docker containers:
 
     Critics also have a profile page where they can log in, update their name, see the creators they are following and the recipes they have bookmarked, and follow and unfollow creators. They also have a search page where they can search for recipes based on the cuisine and category of the recipe and ingredients they have.
 
+### Demo Link
+
+    https://youtu.be/uK-_pyZvkIM
+
 #### Built by Jiya Lakhani, Tom Purcell, and Allison Lisciandro
 
 
